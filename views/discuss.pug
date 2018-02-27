@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    -var currentItem = '论坛';
+    include navbar
+    .container.mt-5.mb-5
+        button#newBtn.btn.btn-primary.btn-sm.float-right(type='button', onclick='window.location.href="/discuss/new"') 新建帖子
+        ul#discussTab.nav.nav-tabs(role='tablist')
+            li.nav-item
+                a#hottest-tab.nav-link.active(data-toggle='tab', href='#hottest', role='tab', aria-controls='hottest', aria-selected='true', preset=0) 最热门
+            li.nav-item
+                a#latest-tab.nav-link(data-toggle='tab', href='#latest', role='tab', aria-controls='latest', aria-selected='false', preset=1) 最近回复
+            li.nav-item
+                a#unreplied-tab.nav-link(data-toggle='tab', href='#unreplied', role='tab', aria-controls='unreplied', aria-selected='false', preset=2) 零回复
+            li.nav-item
+                a#replied-tab.nav-link(data-toggle='tab', href='#replied', role='tab', aria-controls='relplied', aria-selected='false', preset=3) 我回复的
+            li.nav-item
+                a#mine-tab.nav-link(data-toggle='tab', href='#mine', role='tab', aria-controls='mine', aria-selected='false', preset=4) 我的帖子
+        #discussTabContent.tab-content
+            #hottest.tab-pane.fade.mt-3.show.active(role='tabpanel', aria-labelledby='hottest-tab')
+            #latest.tab-pane.fade.mt-3(role='tabpanel', aria-labelledby='latest-tab')
+            #unreplied.tab-pane.fade.mt-3(role='tabpanel', aria-labelledby='unreplied-tab')
+            #replied.tab-pane.fade.mt-3(role='tabpanel', aria-labelledby='replied-tab')
+            #mine.tab-pane.fade(role='tabpanel', aria-labelledby='mine-tab')
+
+    include footbar
+
+    script(src='/javascripts/custom/bundle.discuss.js')

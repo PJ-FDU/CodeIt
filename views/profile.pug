@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    include navbar
+    .container.mt-5.mb-5
+        .container.text-center.mb-5
+            img#img-avatar.rounded-circle.d-block.mb-3.mx-auto(src='', onerror='this.src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519662654074&di=a00339cbef6f6508bdd55ca702a58fd8&imgtype=0&src=http%3A%2F%2Ffd.topitme.com%2Fd%2Fb2%2Ff9%2F1130223975c20f9b2dl.jpg"',alt='用户头像', width="175px", height="175px")
+            button#btn-preview.btn.btn-sm.btn-secondary(type="button") 预览图片
+        .row.justify-content-center
+            .col-4
+                form
+                    h4 基础资料
+                    input#username.form-control.mb-3.mt-3(type='username', placeholder='输入用户名')
+                    input#email.form-control.mb-3(type='email', placeholder='输入用户邮箱')
+                    input#avatar.form-control.mb-3(type='text', placeholder='输入头像图片链接')
+                    input#password-verification.form-control.mb-3(type='password', placeholder='输入密码确认修改')
+                    button#btn-update-profile.btn.btn-secondary.btn-block(type="button") 确认修改
+            .col-4
+                form
+                    h4 修改密码
+                    input#password-old.form-control.mb-3.mt-3(type='password', placeholder='输入旧密码')
+                    input#password-new.form-control.mb-3(type='password', placeholder='输入新密码')
+                    button#btn-update-password.btn.btn-secondary.btn-block(type="button") 确认修改
+                form.mt-4
+                    h4 退出登录
+                    button#btn-logout.btn.btn-secondary.btn-block.mt-3(type="button") 退出登录
+    include footbar
+    script(src='/javascripts/custom/bundle.profile.js')

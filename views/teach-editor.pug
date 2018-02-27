@@ -1,0 +1,41 @@
+doctype html
+html.w-100.h-100
+    head
+        title= title
+        link(rel='shortcut icon', href='/images/favicon.ico')
+        link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.css')
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery/jquery-3.3.1.min.js')
+        script(src='/javascripts/bootstrap/bootstrap.bundle.js')
+        script(src='/javascripts/jquery/js.cookie-2.2.0.min.js')
+        script(src='/javascripts/ace/ace.js')
+        script(src='/javascripts/ace/ext-language_tools.js')
+    body.w-100.h-100(style="display: flex; flex-direction: column")
+        - var currentItem='一对一';
+        include navbar
+        - var languages = ["C", "C++", "C#", "CoffeeScript", "Go", "Haskell", "Java", "Java8", "JavaScript", "Kotlin", "Pascal", "PHP", "Python3", "Rust", "Scala", "Swift", "TypeScript"];
+        - var themes = ["Ambiance", "Chaos", "Chrome", "Clouds", "CloudsMidnight", "Cobalt", "CrimsonEditor", "Dawn", "Dracula", "DreamWeaver", "Eclipse", "Github", "Gob", "Gruvbox", "IdleFingers", "Iplastic", "Katzenmilch", "KrTheme", "Kuroir", "Merbivore", "MerbivoreSoft", "MonoIndustrial", "Monokai", "PastelOnDark", "SolarizedDark", "SolarizedLight", "SqlServer", "Terminal", "Tomorrow", "TomorrowNight", "TomorrowNightBlue", "TomorrowNightBright", "TomorrowNightEighties", "Twilight", "VibrantInk", "Xcode"];
+        .m-0.p-0(style="flex-grow: 1; display: flex; flex-direction: row")
+            .w-75(style="display: flex; flex-direction: column")
+                #editor(style="flex-grow: 1")
+                .container.bg-light.border-top.border-secondary
+                    button#room-name.btn.btn-primary.btn-sm.m-1.float-left(type="button", disabled="disabled") 默认房间
+                    button#room-creator.btn.btn-primary.btn-sm.m-1.float-left(type="button", disabled="disabled") 默认用户
+                    button#run-btn.btn.btn-secondary.btn-sm.float-right.m-1(type="button") 运行代码
+                    select#language-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        each language in languages
+                            option=language
+                    select#theme-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        each theme in themes
+                            option=theme
+                    select#fontsize-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        - for (var size=6; size<=40; size++)
+                            option=size
+            .w-25.bg-black.text-white(style="display: flex; flex-direction: column; font-family: 'Lucida Console'")
+                .pt-1.pb-1.pl-3.pr-3 input:
+                textarea#input.form-control-plaintext.text-white.pt-1.pb-1.pl-3.pr-3(rows=4, style="outline: none; resize:none")
+                .pt-1.pb-1.pl-3.pr-3.border-top.border-secondary output:
+                pre#output.pt-1.pb-1.pl-3.pr-3.text-white(style="flex-grow: 1; font-size: 17px; white-space: pre-wrap; word-wrap: break-word;")
+        script(src='/javascripts/custom/bundle.editor.share.js')
+        script(src='/javascripts/custom/bundle.editor.share.ws.js')

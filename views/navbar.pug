@@ -1,0 +1,17 @@
+- var navbarItems = [{'tag': '首页', 'link': '/'}, {'tag': '教程', 'link': '/tutorial'}, {'tag': '代码', 'link': '/code'}, {'tag': '论坛', 'link': '/discuss'}, {'tag': '一对一', 'link': '/teach'}];
+navbar.navbar.navbar-expand.navbar-dark.bg-dark.pl-5.pr-5
+    a.navbar-brand.text-white.ml-5.mr-5(href='/') CODEIT
+    ul.navbar-nav.mr-auto
+        each navbarItem in navbarItems
+            if navbarItem.tag == currentItem
+                li.nav-item.active.ml-5.mr-5
+                    a.nav-link(href=navbarItem.link)=navbarItem.tag
+            else
+                li.nav-item.ml-5.mr-5
+                    a.nav-link(href=navbarItem.link)=navbarItem.tag
+    ul.navbar-nav.ml-auto.fa-ul
+        li#user-info.nav-item.ml-5.mr-5
+            a.nav-link(href='user/login')
+                i.fas.fa-user-circle
+                |  登录
+script(src='/javascripts/custom/bundle.navbar.js')

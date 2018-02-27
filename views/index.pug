@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  -var currentItem = '首页';
+  include navbar
+  .jumbotron.jumbotron-fluid.m-0
+    .container-fluid.text-center.mt-5.mb-5
+      h2 打造最好的在线编程平台
+      p
+      | ‘理论’是你知道是这样，但它却不好用。
+      br
+      | ‘实践’是它很好用，但你不知道是为什么。
+      br
+      | 程序员将理论和实践结合到一起：既不好用，也不知道是为什么。
+      br
+      br
+      button#try-now.btn.btn-outline-secondary(type='button') 立即体验
+  include footbar
+
+  script(src='/javascripts/custom/bundle.index.js')

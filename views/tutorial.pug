@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    -var currentItem = '教程';
+    include navbar
+    .container.mt-5.mb-5
+        #tutorial-list.row
+    include footbar
+    script(src='/javascripts/custom/bundle.tutorial.js')

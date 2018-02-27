@@ -1,0 +1,23 @@
+doctype html
+html.w-100.h-100
+    head
+        title= title
+        link(rel='shortcut icon', href='/images/favicon.ico')
+        link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.css')
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/bootstrap/bootstrap.bundle.js')
+        script(src='/javascripts/jquery/jquery-3.3.1.min.js')
+        script(src='/javascripts/jquery/js.cookie-2.2.0.min.js')
+    body.w-100.h-100
+        .jumbotron-fluid.h-100.bg-light
+            .container.text-center.w-25.vertical-center
+                img.mb-3(src='/images/codeit-brand-logo-400.png', alt='logo', width='96px', height='96px')
+                h3 登录以开始使用
+                form.mt-3.pb-5
+                    input#username.form-control.mb-3(type='username', placeholder='输入用户名')
+                    input#password.form-control.mb-3(type='password', placeholder='输入密码')
+                    button#btn-login.btn.btn-primary.btn-block.mb-3(type='button') 登录
+                    small
+                        a.text-muted(href='/user/register') 立即注册
+    script(src='/javascripts/custom/bundle.login.js')

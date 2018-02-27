@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    -var currentItem = '教程';
+    include navbar
+    .container.mt-5.mb-5
+        .row
+            .col-3
+                #tutorial-chapter-list.list-group
+            .col-9
+                .markdown-body#tutorial-content(style="font-size: 14px")
+    include footbar
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js')
+    script(src='/javascripts/custom/bundle.tutorial.detail.js')

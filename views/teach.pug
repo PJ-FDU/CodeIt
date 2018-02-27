@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    - var currentItem = '一对一';
+    include navbar
+    .container-fluid.p-5
+        .container-fluid.ml-0.mr-0.pl-0.pr-0
+            button#new-room-btn.btn.btn-secondary.mr-2(type='button', data-toggle='modal', data-target='#new-room-modal') 新建房间
+        .container-fluid.ml-0.mr-0.mt-4.mb-4.pl-0.pr-0
+            #room-list.row
+
+    #new-room-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='new-room-label', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#new-room-label.modal-title 新建房间
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    form
+                        .form-group
+                            label.col-form-label(for='new-room-name') 房间名:
+                            input#new-room-name.form-control(type='text')
+                        .form-group
+                            label.col-form-label(for='new-room-description') 房间描述:
+                            textarea#new-room-description.form-control
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') 取消
+                    button#new-room-create.btn.btn-primary(type='button') 确认
+
+    include footbar
+    script(src='/javascripts/custom/bundle.teach.js')
