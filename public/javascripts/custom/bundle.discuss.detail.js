@@ -136,7 +136,7 @@ function createDisscussDetailItem(id, content, author, authorAvatar, up, down, v
         '       <div class="align-self-start text-center mr-3">' +
         avatarDom +
         '       </div>' +
-        '       <div class="media-body">' +
+        '       <div class="media-body" style="overflow: hidden">' +
         '           <article class="markdown-body" style="font-size: 14px">' + contentFormatted + '</article>' +
         '           <div class="small text-muted float-right mt-2">' + author + ' 发表于 ' + createdDateFormed + ' | ' + floor + '</div>' +
         '       </div>' +
