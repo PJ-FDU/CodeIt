@@ -15,9 +15,8 @@ function checkLoginState() {
             userName = username;
             userAvatar = avatar;
             userId = id;
-            var userProfile = {username: username, avatar: avatar};
             $('#user-info > a').html(
-                '<img class="rounded-circle" width="24px" height="24px" src="' + avatar + '"> '
+                '<img class="rounded-circle" width="24px" height="24px" src="' + avatar + '" onerror="this.src=\'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519791709244&di=4c15184171cb46b7d349f16586ab294a&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b6a355fbea206ac7251df8fda889.png\'"> '
                 + username);
             $('#user-info > a').attr('href', '/user/profile');
         }
