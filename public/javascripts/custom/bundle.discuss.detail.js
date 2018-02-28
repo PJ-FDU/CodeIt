@@ -13,15 +13,14 @@ replyEditor.on('change', function () {
 });
 
 var discussId = window.location.search.replace('?id=', '');
+
 $('#reply-create').click(function () {
     createReply('reply to '+discussId, replyEditor.getValue(), '', discussId);
 });
 
-$('#current-user-name').text(Cookies.get('username'));
-$('#current-user-avatar').text(Cookies.get('username')[0]);
+getDiscussDetail(discussId);
 
-getDiscussDetail();
-
+console.log(discussId);
 $('#discuss-list').on('click', '.vote-up', function () {
     var discussId = $(this).parent().attr('discuss-id');
     var currentNode = $(this);
@@ -61,8 +60,8 @@ $('#discuss-list').on('click', '.vote-down', function () {
         });
 });
 
-function getDiscussDetail() {
-    var discussId = window.location.search.replace('?id=', '');
+function getDiscussDetail(discussId) {
+    console.log(discussId);
     $.post('/api/bulletin/findOne',
         {
             _id: discussId
