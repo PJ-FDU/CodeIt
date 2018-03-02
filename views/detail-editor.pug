@@ -1,0 +1,100 @@
+doctype html
+html.w-100.h-100
+    head
+        title= title
+        link(rel='shortcut icon', href='/images/favicon.ico')
+        link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.css')
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery/jquery-3.3.1.min.js')
+        script(src='/javascripts/bootstrap/bootstrap.bundle.js')
+        script(src='/javascripts/jquery/js.cookie-2.2.0.min.js')
+        script(src='/javascripts/ace/ace.js')
+        script(src='/javascripts/ace/ext-language_tools.js')
+    body.w-100.h-100(style="display: flex; flex-direction: column")
+        - var currentItem='代码';
+        include navbar
+        - var languages = ["C", "C++", "C#", "CoffeeScript", "Go", "Haskell", "Java", "Java8", "JavaScript", "Kotlin", "Pascal", "PHP", "Python3", "Rust", "Scala", "Swift", "TypeScript"];
+        - var themes = ["Ambiance", "Chaos", "Chrome", "Clouds", "CloudsMidnight", "Cobalt", "CrimsonEditor", "Dawn", "Dracula", "DreamWeaver", "Eclipse", "Github", "Gob", "Gruvbox", "IdleFingers", "Iplastic", "Katzenmilch", "KrTheme", "Kuroir", "Merbivore", "MerbivoreSoft", "MonoIndustrial", "Monokai", "PastelOnDark", "SolarizedDark", "SolarizedLight", "SqlServer", "Terminal", "Tomorrow", "TomorrowNight", "TomorrowNightBlue", "TomorrowNightBright", "TomorrowNightEighties", "Twilight", "VibrantInk", "Xcode"];
+        .m-0.p-0(style="flex-grow: 1; display: flex; flex-direction: row")
+            .w-75(style="display: flex; flex-direction: column")
+                #editor(style="flex-grow: 1")
+                .container.bg-light.border-top.border-secondary
+                    img#author-avatar.rounded-circle.m-1(src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519791709244&di=4c15184171cb46b7d349f16586ab294a&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b6a355fbea206ac7251df8fda889.png' width='32px' height='32px' onerror='this.src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519791709244&di=4c15184171cb46b7d349f16586ab294a&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b6a355fbea206ac7251df8fda889.png"')
+                    span#code-title.m-1 default
+                    span#author.m-1.badge.badge-info default
+                    a#vote-up-btn.badge.badge-success.m-1.text-white
+                        i.fa.fa-caret-up.mr-1
+                        span#vote-up 0
+                    a#vote-down-btn.badge.badge-success.m-1.text-white
+                        i.fa.fa-caret-down.mr-1
+                        span#vote-down 0
+                    button#run-btn.btn.btn-secondary.btn-sm.float-right.m-1(type="button") 运行代码
+                    button#saveas-btn.btn.btn-secondary.btn-sm.float-right.m-1(type="button") 另存为
+                    button#save-btn.btn.btn-secondary.btn-sm.float-right.m-1(type="button") 保存
+                    select#language-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        each language in languages
+                            option=language
+                    select#theme-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        each theme in themes
+                            option=theme
+                    select#fontsize-menu.custom-select-sm.float-right.m-1(style="width: 100px; border-radius: 5px")
+                        - for (var size=6; size<=40; size++)
+                            option=size
+            .w-25.bg-black.text-white(style="display: flex; flex-direction: column; font-family: 'Lucida Console'")
+                .pt-1.pb-1.pl-3.pr-3 input:
+                textarea#input.form-control-plaintext.text-white.pt-1.pb-1.pl-3.pr-3(rows=4, style="outline: none; resize:none")
+                .pt-1.pb-1.pl-3.pr-3.border-top.border-secondary output:
+                pre#output.pt-1.pb-1.pl-3.pr-3.text-white(style="flex-grow: 1; font-size: 17px; white-space: pre-wrap; word-wrap: break-word;")
+
+        #save-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        h5.modal-title 保存
+                    .modal-body
+                        h6 代码标题
+                        input#code-title-save.form-control.form-control-sm(type='text', placeholder='输入标题')
+                        h6.mt-2 是否公开
+                        .form-check.form-check-inline
+                            input#public-radio-save.form-check-input(type='radio', name='inlineRadioOptions', value='true')
+                            label.form-check-label(for='public-radio-save')
+                                small 公开
+                        .form-check.form-check-inline
+                            input#private-radio-save.form-check-input(type='radio', name='inlineRadioOptions', value='false')
+                            label.form-check-label(for='private-radio-save')
+                                small 不公开
+                        h6.mt-2 代码语言
+                        input#code-lang-save.form-control.form-control-sm(type='text', placeholder='代码语言' disabled)
+
+                    .modal-footer
+                        button.btn.btn-sm.btn-secondary(type='button', data-dismiss='modal') 取消
+                        button#confirm-save-btn.btn.btn-sm.btn-primary(type='button') 保存
+
+
+        #saveas-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        h5.modal-title 另存为
+                    .modal-body
+                        h6 代码标题
+                        input#code-title-saveas.form-control.form-control-sm(type='text', placeholder='输入标题')
+                        h6.mt-2 是否公开
+                        .form-check.form-check-inline
+                            input#public-radio-saveas.form-check-input(type='radio', name='inlineRadioOptions', value='true')
+                            label.form-check-label(for='public-radio-saveas')
+                                small 公开
+                        .form-check.form-check-inline
+                            input#private-radio-saveas.form-check-input(type='radio', name='inlineRadioOptions', value='false')
+                            label.form-check-label(for='private-radio-saveas')
+                                small 不公开
+                        h6.mt-2 代码语言
+                        input#code-lang-saveas.form-control.form-control-sm(type='text', placeholder='代码语言' disabled)
+
+                    .modal-footer
+                        button.btn.btn-sm.btn-secondary(type='button', data-dismiss='modal') 取消
+                        button#confirm-saveas-btn.btn.btn-sm.btn-primary(type='button') 保存
+
+
+        script(src='/javascripts/custom/bundle.detail.editor.js')

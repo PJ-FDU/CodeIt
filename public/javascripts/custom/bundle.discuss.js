@@ -38,7 +38,6 @@ function getDiscussList(preset) {
                         var created = data.$array[i].created.$date;
                         var replied = data.$array[i].replied?data.$array[i].replied.$date:created;
                         $('#discuss-item-list').append(createDiscussItem(id, title, author, authorAvatar, up, down, replies, created, replied));
-                        // console.log(data.$array[i]);
                     }
                 }
             }
@@ -69,7 +68,7 @@ function createDiscussItem(id, title, author, authorAvatar, up, down, replies, c
         var avatarDom = '<div class="rounded-circle ' + backgroundColor + ' text-white" style="width: 48px; height: 48px; line-height: 48px; font-size: 24px;">' + author[0] + '</div>'
     }
     var discussItem =
-        '<a class="list-group-item list-group-item-action flex-column align-items-start" href="discuss/detail?id=' + id + '">' +
+        '<a class="list-group-item list-group-item-action flex-column align-items-start" href="/discuss/detail?id=' + id + '">' +
         '  <div class="media">' +
         '    <div class="align-self-center text-center mr-3">' +
         avatarDom +

@@ -63,6 +63,10 @@ var currentTheme = 'Monokai';
 var currentThemeName = 'monokai';
 var currentFontSize = '18';
 
+var codeId = undefined;
+var codeTitle = '';
+var isPublic = true;
+
 $("#language-menu").find("option:contains('Python3')").attr("selected",true);
 $("#theme-menu").find("option:contains('Monokai')").attr("selected",true);
 $("#fontsize-menu").find("option:contains('18')").attr("selected",true);
@@ -144,3 +148,103 @@ $('#run-btn').click(function () {
         }
     });
 });
+
+$('#save-btn').click(function () {
+    $('#save-modal').modal('show');
+    $('#code-title-save').val(codeTitle);
+    if (isPublic) {
+        $('#save-modal input:radio:first').attr('checked', 'checked');
+    }
+    else {
+        $('#save-modal input:radio:last').attr('checked', 'checked');
+    }
+    $('#code-lang-save').val(currentLang);
+});
+
+$('#saveas-btn').click(function () {
+    $('#saveas-modal').modal('show');
+    $('#code-title-saveas').val(codeTitle);
+    if (isPublic) {
+        $('#saveas-modal input:radio:first').attr('checked', 'checked');
+    }
+    else {
+        $('#saveas-modal input:radio:last').attr('checked', 'checked');
+    }
+    $('#code-lang-saveas').val(currentLang);
+});
+
+$('#confirm-saveas-btn').click(function () {
+    var title = $('#code-title-saveas').val();
+    codeTitle = title;
+    if ($('#saveas-modal input:radio:checked').val() == 'true') {
+        var public = true;
+    }
+    else {
+        var public = false;
+    }
+    var type = $('#code-lang-saveas').val();
+    var content = editor.getValue();
+    var tags = [type];
+    saveAs(public, title, type, content, tags);
+    $('#saveas-modal').modal('hide');
+});
+
+$('#confirm-save-btn').click(function () {
+    var title = $('#code-title-save').val();
+    codeTitle = title;
+    if ($('#save-modal input:radio:checked').val() == 'true') {
+        var public = true;
+    }
+    else {
+        var public = false;
+    }
+    var type = $('#code-lang-save').val();
+    var content = editor.getValue();
+    var tags = [type];
+    save(codeId, public, title, type, content, tags);
+    $('#save-modal').modal('hide');
+});
+
+function save(id, public, title, type, content, tags) {
+    if (codeId == undefined) {
+        var postData = {
+            public: public,
+            title: title,
+            type: type,
+            content: content,
+            tags: tags
+        };
+    }
+    else {
+        var postData = {
+            id: id,
+            public: public,
+            title: title,
+            type: type,
+            content: content,
+            tags: tags
+        };
+    }
+    $.post('/api/code/create', postData, function (data, status) {
+            if (status == 'success' && data.error_code == 0) {
+                codeId = data.op.$id;
+                alert('保存成功!');
+            }
+        });
+}
+
+function saveAs(public, title, type, content, tags) {
+    $.post('/api/code/create',
+        {
+            public: public,
+            title: title,
+            type: type,
+            content: content,
+            tags: tags
+        },
+        function (data, status) {
+            if (status == 'success' && data.error_code == 0) {
+                alert('保存成功!');
+            }
+        });
+}
