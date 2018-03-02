@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+    -var currentItem = '代码';
+
+    include navbar
+
+    .container.mt-5.mb-5
+        button#newBtn.btn.btn-primary.btn-sm.float-right(type='button', onclick='window.location.href="/discuss/new"') 新建代码
+        ul#codeTab.nav.nav-tabs(role='tablist')
+            li.nav-item
+                a#public-tab.nav-link.active(data-toggle='tab', href='#public', role='tab', aria-controls='public', aria-selected='true') 公开代码
+            li.nav-item
+                a#mine-tab.nav-link(data-toggle='tab', href='#mine', role='tab', aria-controls='mine', aria-selected='false') 我的代码
+        #code-list.list-group.mt-3
+
+    include footbar
+
+    script(src='/javascripts/custom/bundle.code.js')
+
+    // sssssssssssssssssssss
