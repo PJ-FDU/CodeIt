@@ -214,23 +214,28 @@ function save(id, public, title, type, content, tags) {
             content: content,
             tags: tags
         };
+        $.post('/api/code/create', postData, function (data, status) {
+            if (status == 'success' && data.error_code == 0) {
+                codeId = data.op.$id;
+                alert('保存成功!');
+            }
+        });
     }
     else {
         var postData = {
-            id: id,
+            _id: id,
             public: public,
             title: title,
             type: type,
             content: content,
             tags: tags
         };
-    }
-    $.post('/api/code/create', postData, function (data, status) {
+        $.post('/api/code/update', postData, function (data, status) {
             if (status == 'success' && data.error_code == 0) {
-                codeId = data.op.$id;
                 alert('保存成功!');
             }
         });
+    }
 }
 
 function saveAs(public, title, type, content, tags) {

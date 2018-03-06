@@ -262,9 +262,9 @@ function voteDown() {
 }
 
 function save(id, public, title, type, content, tags) {
-    $.post('/api/code/create',
+    $.post('/api/code/update',
         {
-            id: id,
+            _id: id,
             public: public,
             title: title,
             type: type,
