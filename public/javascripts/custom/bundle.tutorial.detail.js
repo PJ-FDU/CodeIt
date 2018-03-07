@@ -2,7 +2,8 @@ var lastChapter = null;
 
 $.post('/api/class/lesson/find',
     {
-        cid: window.location.search.slice(1).split('=')[1]
+        cid: window.location.search.slice(1).split('=')[1],
+        $limit: 10000
     },
     function (data, status) {
         if (status == 'success' && data.error_code == 0) {
